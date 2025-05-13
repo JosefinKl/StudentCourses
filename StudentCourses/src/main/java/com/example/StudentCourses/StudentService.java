@@ -20,4 +20,18 @@ public class StudentService {
     public List<Student> getAllStudents() {
         return studentRepository.findAll();
     }
+
+    public Student getStudentById(int id) {
+        return studentRepository.getReferenceById(id);
+    }
+    public Student addStudent(Student student) {
+        return studentRepository.save(student);
+    }
+    public Student updateStudent(Student student) {
+        return studentRepository.findById(student.getId()).map(Students ->{
+            Students.setFirstName(student.getFirstName());
+            Students.setLastName(student.getLastName());
+            return studentRepository.save(Students);
+        }).orElse(null);
+    }
 }
