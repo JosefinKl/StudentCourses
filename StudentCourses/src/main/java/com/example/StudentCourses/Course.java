@@ -3,6 +3,8 @@ package com.example.StudentCourses;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 
+import java.util.Set;
+
 @Entity
 @Table(name ="Courses")
 public class Course {
@@ -12,17 +14,15 @@ public class Course {
 
     private String courseName;
 
-    @ManyToOne
-    @JsonBackReference
-    @JoinColumn(name = "student_id")
-    private Student student;
+    @ManyToMany(mappedBy = "courses")
+    private Set<Student> students;
 
-    public Student getStudent() {
-        return student;
+    public Set<Student> getStudents() {
+        return students;
     }
 
-    public void setStudent(Student student) {
-        this.student = student;
+    public void setStudents(Set<Student> students) {
+        this.students = students;
     }
 
     public Course() {

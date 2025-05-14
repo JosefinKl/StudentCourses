@@ -15,5 +15,12 @@ public class CourseService {
         this.courseRepository = courseRepository;
     }
 
+    public Course getCourse(int id) {
+        return courseRepository.getReferenceById(id);
+    }
+
+    public Course addCourse(Course course) {
+        return courseRepository.save(course);
+    }
 
 }
