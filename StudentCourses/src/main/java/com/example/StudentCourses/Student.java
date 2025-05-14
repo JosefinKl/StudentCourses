@@ -30,8 +30,8 @@ public class Student {
     private Set<Course> courses;
 
 
-    public Student(Integer id, String firstName, String lastName) {
-        this.id = id;
+    public Student(String firstName, String lastName) {
+
         this.firstName = firstName;
         this.lastName = lastName;
     }

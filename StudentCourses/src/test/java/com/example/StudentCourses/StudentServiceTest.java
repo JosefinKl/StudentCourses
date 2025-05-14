@@ -1,0 +1,52 @@
+package com.example.StudentCourses;
+
+import org.junit.jupiter.api.Test;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import static org.junit.jupiter.api.Assertions.*;
+import static org.mockito.Mockito.*;
+
+
+class StudentServiceTest {
+
+    //Mock repository. Tests without database and Spring.
+    StudentRepository mockedRepo =mock(StudentRepository.class);
+    CourseRepository mockedCourseRepo= mock(CourseRepository.class);
+
+    StudentService studentService = new StudentService(mockedRepo, mockedCourseRepo);
+
+
+
+    @Test
+    void getAllStudentsShouldReturnAllStudents() {
+        //arrange
+        Student s1 = new Student("John", "Smith");
+        Student s2 = new Student("Jane", "Smith");
+        List<Student> students = List.of(s1,s2);
+
+        when(mockedRepo.findAll()).thenReturn(students);
+
+        //act
+        List<Student> result = studentService.getAllStudents();
+
+        //assert
+        assertNotNull(result);
+        assertEquals(students.size(), result.size());
+        assertEquals(students, result);
+    }
+
+    //Test to update a student when the student does not exist
+    @Test
+    void testToUpdateStudentWithNonExistingStudentShouldReturnNull() {
+        //Arrange
+        Student s1 = new Student("John", "Smith");
+
+        //Act
+        Student updateStudent = studentService.updateStudent(s1);
+       //Assert
+        assertNull(updateStudent);
+    }
+
+}
