@@ -1,6 +1,7 @@
 package com.example.StudentCourses;
 
 import org.junit.jupiter.api.Test;
+import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-
+@ActiveProfiles("test")
 class StudentServiceTest {
 
     //Mock repository. Tests without database and Spring.

@@ -48,6 +48,12 @@ class StudentControllerTestIntegrationTest {
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("Test", firstName);
         assertEquals("TestLast", lastName);
-
     }
+
+
+//    @Test
+//    void testDeleteStudentAndGetAllStudents(){
+//        Student newStudent = new Student("Test", "TestLast");
+//
+//    }
 }
