@@ -7,7 +7,7 @@ jobs:
 
     services:
       mysql:
-        image: mysql 8.0
+        image: mysql:8.0
         env:
           MYSQL_ROOT_PASSWORD: root
           MYSQL_DATABASE: testdb
@@ -21,7 +21,7 @@ jobs:
           --health-timeout=5s
           --health-retries=5
     env:
-      DB_URL: jdbc:mysql://localhost:3306/students_test_db
+      DB_URL: jdbc:mysql://localhost:3306/testdb
       DB_USER: testuser
       DB_PASSWORD: testpass
 
