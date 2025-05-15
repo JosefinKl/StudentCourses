@@ -50,4 +50,23 @@ class StudentServiceTest {
         assertNull(updateStudent);
     }
 
+    @Test
+    void testToConvertStudentToStudentDTO(){
+        //Arrange
+        Student s1 = new Student("John", "Smith");
+        StudentDTO s1DTO = new StudentDTO();
+        s1DTO.setFirstName("John");
+        s1DTO.setLastName("Smith");
+
+
+        //Act
+        studentService.convertToDTO(s1);
+
+        //Assert
+        assertEquals(s1.getFirstName(), s1DTO.getFirstName());
+        assertEquals(s1.getLastName(), s1DTO.getLastName());
+
+
+    }
+
 }
