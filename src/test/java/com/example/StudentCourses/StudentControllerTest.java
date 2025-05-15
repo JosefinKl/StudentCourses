@@ -101,7 +101,8 @@ class StudentControllerTest {
     void deleteOneStudent() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/students"));
         mockMvc.perform(MockMvcRequestBuilders.get("/students"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.content().string(""));
         //Arrange
         Student newStudent = new Student("Test", "TestLast");
         Student newStudent2 = new Student("Test2", "TestLast2");
