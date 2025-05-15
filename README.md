@@ -46,7 +46,7 @@ body example:
 Delete course
 http://localhost:8083/courses/{courseId}
 
-
+TESTS
 The tests are run automatically when the app is pushed and pulled to/in github. 
 
 
