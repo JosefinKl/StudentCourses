@@ -34,15 +34,17 @@ class CourseServiceTest {
     public void testGetAllCourses(){
         //Arrange
         Course course = new Course();
+        course.setId(1);
         course.setCourseName("Test");
         when(mockedCourseRepo.save(course)).thenReturn(course);
-        when(mockedCourseRepo.findAll()).thenReturn(List.of(course));
+        when(mockedCourseRepo.getReferenceById(1)).thenReturn(course);
         //Act
         Course c = courseService.addCourse(course);
-        Course c2 = courseService.getCourse(course.getId());
+        Course c2 = courseService.getCourse(1);
 
         //Assert
         assertNotNull(c2);
+        assertEquals(c.getCourseName(), c2.getCourseName());
     }
 
 }
