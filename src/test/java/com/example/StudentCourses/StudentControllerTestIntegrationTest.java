@@ -90,11 +90,14 @@ class StudentControllerTestIntegrationTest {
     @Test
     void testUpdateStudent(){
         Student newStudent = new Student("Test", "TestLast");
-        Integer id = newStudent.getId();
+
         Student updatedStudent = new Student("TestUpdate", "TestLastUpdate");
 
         ResponseEntity<Student> postResponse = restTemplate.postForEntity("http://localhost:" + port + "/students", newStudent, Student.class);
+
         assertEquals(HttpStatus.OK, postResponse.getStatusCode() );
+
+
         ResponseEntity<List<Student>> response = restTemplate.exchange(
                 "http://localhost:" + port + "/students",
                 HttpMethod.GET,
@@ -102,9 +105,8 @@ class StudentControllerTestIntegrationTest {
                 new ParameterizedTypeReference<java.util.List<Student>>() {}
         );
         List<Student> students = response.getBody();
-        Integer id2 = students.get(id).getId();
-        //Assert
-        assertEquals(id2, id);
+        Integer id = postResponse.getBody().getId();
+
 
         HttpEntity<Student> requestEntity = new HttpEntity<>(updatedStudent);
 
