@@ -46,9 +46,9 @@ class StudentControllerTestIntegrationTest {
         );
 
         List<Student> students = response.getBody();
-
-        String firstName = students.get(id).getFirstName();
-        String lastName = students.get(id).getLastName();
+        Integer studentId = students.get(0).getId();
+        String firstName = students.get(0).getFirstName();
+        String lastName = students.get(0).getLastName();
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("Test", firstName);
@@ -62,15 +62,19 @@ class StudentControllerTestIntegrationTest {
 
         ResponseEntity<Student> postResponse = restTemplate.postForEntity("http://localhost:" + port + "/students", newStudent, Student.class);
         assertEquals(HttpStatus.OK, postResponse.getStatusCode() );
+        Integer id = postResponse.getBody().getId();
 
         ResponseEntity<List<Student>> response = restTemplate.exchange(
-                "http://localhost:" + port + "/students",
+                "http://localhost:" + port + "/students/" + id,
                 HttpMethod.GET,
                 null,
                 new ParameterizedTypeReference<java.util.List<Student>>() {}
         );
         List<Student> students = response.getBody();
-        Integer id = students.get(0).getId();
+        Integer studentId = students.get(0).getId();
+        String firstName = students.get(0).getFirstName();
+        String lastName = students.get(0).getLastName();
+
 
         ResponseEntity<List<Student>> deleteResponse = restTemplate.exchange(
                 "http://localhost:" + port + "/students/" + id,
