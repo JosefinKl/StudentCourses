@@ -28,6 +28,14 @@ public class CourseController {
         return courseRepository.save(course);
     }
 
+    @DeleteMapping("/{id}")
+    public void deleteCourse(@PathVariable int id) {
+        courseRepository.deleteById(id);
+    }
 
+    @PutMapping
+    public Course updateCourse(@RequestBody Course course) {
+        return courseRepository.save(course);
+    }
 
 }
