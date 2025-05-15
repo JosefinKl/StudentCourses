@@ -60,7 +60,6 @@ public class StudentController {
             return ResponseEntity.accepted().body(s);
 
         }
-
     }
 
     @PostMapping("/{studentId}/courses")
