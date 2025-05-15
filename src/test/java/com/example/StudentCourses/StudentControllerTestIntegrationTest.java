@@ -51,9 +51,37 @@ class StudentControllerTestIntegrationTest {
     }
 
 
-//    @Test
-//    void testDeleteStudentAndGetAllStudents(){
-//        Student newStudent = new Student("Test", "TestLast");
-//
-//    }
+    @Test
+    void testDeleteStudentAndGetAllStudents(){
+        Student newStudent = new Student("Test", "TestLast");
+
+        ResponseEntity<Student> postResponse = restTemplate.postForEntity("http://localhost:" + port + "/students", newStudent, Student.class);
+        assertEquals(HttpStatus.OK, postResponse.getStatusCode() );
+
+        ResponseEntity<List<Student>> response = restTemplate.exchange(
+                "http://localhost:" + port + "/students",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<java.util.List<Student>>() {}
+        );
+        List<Student> students = response.getBody();
+        Integer id = students.get(0).getId();
+
+        ResponseEntity<List<Student>> deleteResponse = restTemplate.exchange(
+                "http://localhost:" + port + "/students/" + id,
+                HttpMethod.DELETE,
+                null,
+                new ParameterizedTypeReference<java.util.List<Student>>() {}
+        );
+        assertEquals(HttpStatus.OK, deleteResponse.getStatusCode() );
+
+        ResponseEntity<List<Student>> response2 = restTemplate.exchange(
+                "http://localhost:" + port + "/students",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<java.util.List<Student>>() {}
+        );
+        List<Student> studentsNull = response2.getBody();
+        assertNull(studentsNull);
+            }
 }
