@@ -6,10 +6,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.core.ParameterizedTypeReference;
+import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpMethod;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.List;
 
@@ -83,5 +86,37 @@ class StudentControllerTestIntegrationTest {
         List<Student> studentsNull = response2.getBody();
         assertNull(studentsNull);
     }
+
+    @Test
+    void testUpdateStudent(){
+        Student newStudent = new Student("Test", "TestLast");
+        Student updatedStudent = new Student("TestUpdate", "TestLastUpdate");
+
+        ResponseEntity<Student> postResponse = restTemplate.postForEntity("http://localhost:" + port + "/students", newStudent, Student.class);
+        assertEquals(HttpStatus.OK, postResponse.getStatusCode() );
+        ResponseEntity<List<Student>> response = restTemplate.exchange(
+                "http://localhost:" + port + "/students",
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<java.util.List<Student>>() {}
+        );
+        List<Student> students = response.getBody();
+        Integer id = students.get(0).getId();
+
+        HttpEntity<Student> requestEntity = new HttpEntity<>(updatedStudent);
+
+        ResponseEntity<Student> updateResponse = restTemplate.exchange(
+                "http://localhost:" + port + "/students/" + id,
+                HttpMethod.PUT,
+                requestEntity,
+                Student.class);
+
+        //Assert
+        assertEquals(HttpStatus.OK, updateResponse.getStatusCode() );
+        assertEquals("TestUpdate", updateResponse.getBody().getFirstName());
+        assertEquals("TestLastUpdate", updateResponse.getBody().getLastName());
+
+    }
+
 
 }
