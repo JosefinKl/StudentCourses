@@ -13,6 +13,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import org.springframework.transaction.annotation.Transactional;
 
+import static org.hamcrest.Matchers.hasSize;
 import static org.hamcrest.Matchers.is;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.mock;
@@ -50,21 +51,41 @@ class CourseControllerTest {
 
     }
 
+//    @Test
+//    void getAllCourses() throws Exception {
+//        //Arrange
+//        Course newCourse = new Course();
+//        newCourse.setCourseName("Test");
+//
+//        //Act and Assert
+//        mockMvc.perform(MockMvcRequestBuilders.post("/courses")
+//                        .contentType(MediaType.APPLICATION_JSON)
+//                        .content(objectMapper.writeValueAsString(newCourse)))
+//                .andExpect(MockMvcResultMatchers.status().isOk())
+//                .andExpect(MockMvcResultMatchers.jsonPath("$.courseName", is("Test")));
+//
+//        mockMvc.perform(MockMvcRequestBuilders.get("/courses"))
+//                .andExpect(MockMvcResultMatchers.status().isOk());
+//
+//    }
+
     @Test
     void getAllCourses() throws Exception {
-        //Arrange
+        // Arrange
         Course newCourse = new Course();
         newCourse.setCourseName("Test");
 
-        //Act and Assert
+        // Act and Assert for POST
         mockMvc.perform(MockMvcRequestBuilders.post("/courses")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(newCourse)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.courseName", is("Test")));
 
+        // Act and Assert for GET
         mockMvc.perform(MockMvcRequestBuilders.get("/courses"))
-                .andExpect(MockMvcResultMatchers.status().isOk());
-
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$[0].courseName", is("Test")));
     }
 }
