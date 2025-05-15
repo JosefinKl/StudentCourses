@@ -62,7 +62,7 @@ class StudentControllerTest {
     private ObjectMapper objectMapper;
 
 
-    //Component test to test create channel
+    //Component test to test create student
     @Test
     void createStudent() throws Exception {
         //Arrange
