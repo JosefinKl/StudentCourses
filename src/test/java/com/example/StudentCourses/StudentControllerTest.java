@@ -78,5 +78,25 @@ class StudentControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.lastName", is("TestLast")));
 
     }
+    @Test
+    void deleteAllStudents() throws Exception {
+
+        //Arrange
+        Student newStudent = new Student("Test", "TestLast");
+
+        //Act and Assert
+        mockMvc.perform(MockMvcRequestBuilders.post("/students")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(newStudent)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName", is("Test")))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName", is("TestLast")));
+        mockMvc.perform(MockMvcRequestBuilders.delete("/students"))
+                .andExpect(MockMvcResultMatchers.status().isOk());
+
+        assertEquals(0, studentRepository.count());
+
+
+    }
 
 }
