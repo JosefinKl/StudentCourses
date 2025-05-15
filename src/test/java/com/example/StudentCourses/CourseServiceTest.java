@@ -22,8 +22,17 @@ class CourseServiceTest {
         //Act
         Course c = courseService.addCourse(course);
         assertNotNull(c);
+    }
 
-
+    @Test
+    public void testGetAllCourses(){
+        //Arrange
+        Course course = new Course();
+        course.setCourseName("Test");
+        //Act
+        Course c = courseService.addCourse(course);
+        //Assert
+        assertNotNull(c);
     }
 
 }
