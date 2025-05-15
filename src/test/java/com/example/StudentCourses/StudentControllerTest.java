@@ -125,7 +125,9 @@ class StudentControllerTest {
         mockMvc.perform(MockMvcRequestBuilders.delete("/students/1"))
                 .andExpect(MockMvcResultMatchers.status().isOk());
 
-        assertEquals(1, studentRepository.count());
+        mockMvc.perform(MockMvcRequestBuilders.get("/students"))
+                .andExpect(MockMvcResultMatchers.status().isOk()).andExpect(MockMvcResultMatchers.jsonPath("$.firstName", is("Test")));
+
     }
 
 }
