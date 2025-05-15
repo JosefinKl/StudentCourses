@@ -5,6 +5,7 @@ import org.springframework.test.context.ActiveProfiles;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
@@ -54,18 +55,26 @@ class StudentServiceTest {
     void testToConvertStudentToStudentDTO(){
         //Arrange
         Student s1 = new Student("John", "Smith");
-        StudentDTO s1DTO = new StudentDTO();
-        s1DTO.setFirstName("John");
-        s1DTO.setLastName("Smith");
+        s1.setId(1);
+        Course c1 = new Course();
+        c1.setId(101);
+        s1.setCourses(Set.of(c1));
+
+        StudentDTO expected1DTO = new StudentDTO();
+        expected1DTO.setId(1);
+        expected1DTO.setFirstName("John");
+        expected1DTO.setLastName("Smith");
+        expected1DTO.setCourseIds(Set.of(101));
 
 
         //Act
-        studentService.convertToDTO(s1);
+        StudentDTO actualDTO = studentService.convertToDTO(s1);
 
         //Assert
-        assertEquals(s1.getFirstName(), s1DTO.getFirstName());
-        assertEquals(s1.getLastName(), s1DTO.getLastName());
-
+        assertEquals(expected1DTO.getId(), actualDTO.getId());
+        assertEquals(expected1DTO.getFirstName(), actualDTO.getFirstName());
+        assertEquals(expected1DTO.getLastName(), actualDTO.getLastName());
+        assertEquals(expected1DTO.getCourseIds(), actualDTO.getCourseIds());
 
     }
 

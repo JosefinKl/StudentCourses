@@ -73,7 +73,7 @@ public class StudentService {
         dto.setId(student.getId());
         dto.setFirstName(student.getFirstName());
         dto.setLastName(student.getLastName());
-        // Om du vill inkludera kurserna:
+
         Set<Integer> courseIds = student.getCourses().stream()
                 .map(Course::getId)
                 .collect(Collectors.toSet());
