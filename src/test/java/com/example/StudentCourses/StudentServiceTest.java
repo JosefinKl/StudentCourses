@@ -66,7 +66,6 @@ class StudentServiceTest {
         expected1DTO.setLastName("Smith");
         expected1DTO.setCourseIds(Set.of(101));
 
-
         //Act
         StudentDTO actualDTO = studentService.convertToDTO(s1);
 
@@ -77,5 +76,7 @@ class StudentServiceTest {
         assertEquals(expected1DTO.getCourseIds(), actualDTO.getCourseIds());
 
     }
+
+
 
 }
