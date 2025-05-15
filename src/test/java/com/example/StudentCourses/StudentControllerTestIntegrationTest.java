@@ -36,6 +36,7 @@ class StudentControllerTestIntegrationTest {
 
         ResponseEntity<Student> postResponse = restTemplate.postForEntity("http://localhost:" + port + "/students", newStudent, Student.class);
         assertEquals(HttpStatus.OK, postResponse.getStatusCode() );
+        Integer id = postResponse.getBody().getId();
 
         ResponseEntity<List<Student>> response = restTemplate.exchange(
                 "http://localhost:" + port + "/students",
@@ -45,8 +46,9 @@ class StudentControllerTestIntegrationTest {
         );
 
         List<Student> students = response.getBody();
-        String firstName = students.get(0).getFirstName();
-        String lastName = students.get(0).getLastName();
+
+        String firstName = students.get(id).getFirstName();
+        String lastName = students.get(id).getLastName();
 
         assertEquals(HttpStatus.OK, response.getStatusCode());
         assertEquals("Test", firstName);
@@ -55,6 +57,7 @@ class StudentControllerTestIntegrationTest {
 
     @Test
     void testDeleteStudentAndGetAllStudents(){
+
         Student newStudent = new Student("Test", "TestLast");
 
         ResponseEntity<Student> postResponse = restTemplate.postForEntity("http://localhost:" + port + "/students", newStudent, Student.class);
