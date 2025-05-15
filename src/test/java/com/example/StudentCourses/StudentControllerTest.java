@@ -95,13 +95,11 @@ class StudentControllerTest {
 
         assertEquals(0, studentRepository.count());
 
-
-
     }
 
     @Test
     void deleteOneStudent() throws Exception {
-
+        mockMvc.perform(MockMvcRequestBuilders.delete("/students"));
         //Arrange
         Student newStudent = new Student("Test", "TestLast");
         Student newStudent2 = new Student("Test2", "TestLast2");
