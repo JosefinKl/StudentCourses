@@ -1,5 +1,6 @@
 package com.example.StudentCourses;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
@@ -28,6 +29,19 @@ class StudentControllerTestIntegrationTest {
 
     @Autowired
     private TestRestTemplate restTemplate;
+
+    @BeforeEach
+    void clearDatabase() {
+        restTemplate.exchange(
+                "http://localhost:" + port + "/students",
+                HttpMethod.DELETE,
+                null,
+                Void.class
+        );
+    }
+
+
+
 
     @Test
     public void testCreateStudentAndGetAllStudents(){

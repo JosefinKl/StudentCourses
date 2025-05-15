@@ -62,6 +62,11 @@ public class StudentController {
         }
     }
 
+    @DeleteMapping
+    public void deleteAllStudents() {
+        repo.deleteAll();
+    }
+
     @PostMapping("/{studentId}/courses")
     public ResponseEntity<StudentDTO> addCourseToStudents(@PathVariable Integer studentId, @RequestBody List<Integer> courseIds){
         return ResponseEntity.ok(studentService.addCoursesToStudent(studentId,courseIds));
