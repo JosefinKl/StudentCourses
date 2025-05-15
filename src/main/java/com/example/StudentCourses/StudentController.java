@@ -63,7 +63,7 @@ public class StudentController {
 
     }
 
-    @PostMapping("/{studentId}/tags")
+    @PostMapping("/{studentId}/courses")
     public ResponseEntity<StudentDTO> addCourseToStudents(@PathVariable Integer studentId, @RequestBody List<Integer> courseIds){
         return ResponseEntity.ok(studentService.addCoursesToStudent(studentId,courseIds));
     }
