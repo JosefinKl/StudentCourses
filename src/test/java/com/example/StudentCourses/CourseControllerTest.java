@@ -49,4 +49,23 @@ class CourseControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.courseName", is("Test")));
 
     }
+
+    @Test
+    void getAllCourses() throws Exception {
+        //Arrange
+        Course newCourse = new Course();
+        newCourse.setCourseName("Test");
+
+        //Act and Assert
+        mockMvc.perform(MockMvcRequestBuilders.post("/courses")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(objectMapper.writeValueAsString(newCourse)))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.courseName", is("Test")));
+
+        mockMvc.perform(MockMvcRequestBuilders.get("/courses"))
+                .andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.courseName", is("Test")));
+
+    }
 }
