@@ -35,10 +35,14 @@ class CourseServiceTest {
         //Arrange
         Course course = new Course();
         course.setCourseName("Test");
+        when(mockedCourseRepo.save(course)).thenReturn(course);
+        when(mockedCourseRepo.findAll()).thenReturn(List.of(course));
         //Act
         Course c = courseService.addCourse(course);
+        Course c2 = courseService.getCourse(course.getId());
+
         //Assert
-        assertNotNull(c);
+        assertNotNull(c2);
     }
 
 }
