@@ -90,6 +90,7 @@ class StudentControllerTestIntegrationTest {
     @Test
     void testUpdateStudent(){
         Student newStudent = new Student("Test", "TestLast");
+        Integer id = newStudent.getId();
         Student updatedStudent = new Student("TestUpdate", "TestLastUpdate");
 
         ResponseEntity<Student> postResponse = restTemplate.postForEntity("http://localhost:" + port + "/students", newStudent, Student.class);
@@ -101,7 +102,9 @@ class StudentControllerTestIntegrationTest {
                 new ParameterizedTypeReference<java.util.List<Student>>() {}
         );
         List<Student> students = response.getBody();
-        Integer id = students.get(0).getId();
+        Integer id2 = students.get(id).getId();
+        //Assert
+        assertEquals(id2, id);
 
         HttpEntity<Student> requestEntity = new HttpEntity<>(updatedStudent);
 
