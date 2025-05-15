@@ -108,41 +108,41 @@ class StudentControllerTestIntegrationTest {
 //        assertNull(studentsNull);
 //    }
 
-//    @Test
-//    void testUpdateStudent(){
-//
-//        Student newStudent = new Student("Test", "TestLast");
-//        Student updatedStudent = new Student("TestUpdated", "TestLastUpdated");
-//
-//        ResponseEntity<Student> postResponse = restTemplate.postForEntity("http://localhost:" + port + "/students", newStudent, Student.class);
-//        assertEquals(HttpStatus.OK, postResponse.getStatusCode() );
-//        Integer id = postResponse.getBody().getId();
-//
-//        ResponseEntity<List<Student>> response = restTemplate.exchange(
-//                "http://localhost:" + port + "/students/" + id,
-//                HttpMethod.GET,
-//                null,
-//                new ParameterizedTypeReference<java.util.List<Student>>() {}
-//        );
-//        List<Student> students = response.getBody();
-//        Integer studentId = students.get(0).getId();
-//        String firstName = students.get(0).getFirstName();
-//        String lastName = students.get(0).getLastName();
-//
-//
-//        HttpEntity<Student> requestEntity = new HttpEntity<>(updatedStudent);
-//
-//        ResponseEntity<Student> updateResponse = restTemplate.exchange(
-//                "http://localhost:" + port + "/students/" + studentId,
-//                HttpMethod.PUT,
-//                requestEntity,
-//                Student.class);
-//
-//        //Assert
-//        assertEquals(HttpStatus.OK, updateResponse.getStatusCode() );
-//        assertEquals("TestUpdate", updateResponse.getBody().getFirstName());
-//        assertEquals("TestLastUpdate", updateResponse.getBody().getLastName());
-//
-//    }
+    @Test
+    void testUpdateStudent(){
+
+        Student newStudent = new Student("Test", "TestLast");
+        Student updatedStudent = new Student("TestUpdated", "TestLastUpdated");
+
+        ResponseEntity<Student> postResponse = restTemplate.postForEntity("http://localhost:" + port + "/students", newStudent, Student.class);
+        assertEquals(HttpStatus.OK, postResponse.getStatusCode() );
+        Integer id = postResponse.getBody().getId();
+
+        ResponseEntity<List<Student>> response = restTemplate.exchange(
+                "http://localhost:" + port + "/students/" + id,
+                HttpMethod.GET,
+                null,
+                new ParameterizedTypeReference<java.util.List<Student>>() {}
+        );
+        List<Student> students = response.getBody();
+        Integer studentId = students.get(0).getId();
+        String firstName = students.get(0).getFirstName();
+        String lastName = students.get(0).getLastName();
+
+
+        HttpEntity<Student> requestEntity = new HttpEntity<>(updatedStudent);
+
+        ResponseEntity<Student> updateResponse = restTemplate.exchange(
+                "http://localhost:" + port + "/students/" + studentId,
+                HttpMethod.PUT,
+                requestEntity,
+                Student.class);
+
+        //Assert
+        assertEquals(HttpStatus.OK, updateResponse.getStatusCode() );
+        assertEquals("TestUpdate", updateResponse.getBody().getFirstName());
+        assertEquals("TestLastUpdate", updateResponse.getBody().getLastName());
+
+    }
 
 }
