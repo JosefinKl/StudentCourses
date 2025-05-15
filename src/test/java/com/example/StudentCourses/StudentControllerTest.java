@@ -100,6 +100,8 @@ class StudentControllerTest {
     @Test
     void deleteOneStudent() throws Exception {
         mockMvc.perform(MockMvcRequestBuilders.delete("/students"));
+        mockMvc.perform(MockMvcRequestBuilders.get("/students"))
+                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(0)));
         //Arrange
         Student newStudent = new Student("Test", "TestLast");
         Student newStudent2 = new Student("Test2", "TestLast2");
@@ -111,6 +113,7 @@ class StudentControllerTest {
                 .andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.firstName", is("Test")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.lastName", is("TestLast")));
+
 
         mockMvc.perform(MockMvcRequestBuilders.post("/students")
                         .contentType(MediaType.APPLICATION_JSON)
