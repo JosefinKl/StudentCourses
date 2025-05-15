@@ -50,10 +50,4 @@ class StudentControllerTestIntegrationTest {
         assertEquals("TestLast", lastName);
     }
 
-
-//    @Test
-//    void testDeleteStudentAndGetAllStudents(){
-//        Student newStudent = new Student("Test", "TestLast");
-//
-//    }
 }
