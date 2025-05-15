@@ -97,39 +97,5 @@ class StudentControllerTest {
 
     }
 
-//    @Test
-//    void deleteOneStudent() throws Exception {
-//        mockMvc.perform(MockMvcRequestBuilders.delete("/students"));
-//        mockMvc.perform(MockMvcRequestBuilders.get("/students"))
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.content().string(""));
-//        //Arrange
-//        Student newStudent = new Student("Test", "TestLast");
-//        Student newStudent2 = new Student("Test2", "TestLast2");
-//
-//        //Act and Assert
-//        mockMvc.perform(MockMvcRequestBuilders.post("/students")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(objectMapper.writeValueAsString(newStudent)))
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName", is("Test")))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName", is("TestLast")));
-//
-//
-//        mockMvc.perform(MockMvcRequestBuilders.post("/students")
-//                        .contentType(MediaType.APPLICATION_JSON)
-//                        .content(objectMapper.writeValueAsString(newStudent2)))
-//                .andExpect(MockMvcResultMatchers.status().isOk())
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName", is("Test2")))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName", is("TestLast2")));
-//
-//        mockMvc.perform(MockMvcRequestBuilders.delete("/students/1"))
-//                .andExpect(MockMvcResultMatchers.status().isOk());
-//
-//        // Assert
-//        mockMvc.perform(MockMvcRequestBuilders.get("/students"))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$", hasSize(1)))
-//                .andExpect(MockMvcResultMatchers.jsonPath("$[0].firstName", is("Test2")));
-//    }
 
 }
