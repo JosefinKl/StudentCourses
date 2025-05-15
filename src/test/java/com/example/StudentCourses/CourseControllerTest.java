@@ -46,7 +46,7 @@ class CourseControllerTest {
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(objectMapper.writeValueAsString(newCourse)))
                 .andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.name", is("Test")));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.courseName", is("Test")));
 
     }
 }
